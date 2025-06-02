@@ -21,8 +21,12 @@ st.subheader('Summarize URL')
 #Getting API KEY & YOUTUBE URL WEBSITE
 
 with st.sidebar:
-    model_name = st.selectbox("Model", ["llama3-8b-8192","gemma2-9b-it","deepseek-r1-distill-llama-70b"])
-    temperature = st.slider("Temperature", 0.0, 1.0, 0.7)
+    model_name = st.selectbox("Model", [
+    "llama3-8b-8192", 
+    "mixtral-8x7b-32768", 
+    "gemma-7b-it"
+])
+    
     groq_api_key = st.text_input("Groq API key", value="", type="password")
 
 generic_url = st.text_input("URL", label_visibility="collapsed")
@@ -30,7 +34,7 @@ generic_url = st.text_input("URL", label_visibility="collapsed")
 #MODEL LOAD
 
 
-llm = ChatGroq(model=model_name,temperature=temperature, api_key=groq_api_key)
+llm = ChatGroq(model=model_name, api_key=groq_api_key)
 
 prompt_template = ''' 
   Provide a summary of the following content about 300 words:

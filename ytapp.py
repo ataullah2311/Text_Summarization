@@ -27,7 +27,10 @@ with st.sidebar:
     "gemma-7b-it"
 ])
     
-    groq_api_key = st.text_input("Groq API key", value="", type="password")
+import os
+groq_api_key = os.getenv("GROQ_API_KEY")
+if not groq_api_key:
+    st.error("Groq API Key not found. Please set it in Streamlit Secrets.")
 
 generic_url = st.text_input("URL", label_visibility="collapsed")
 
